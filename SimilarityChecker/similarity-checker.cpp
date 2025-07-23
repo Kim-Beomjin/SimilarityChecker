@@ -12,10 +12,12 @@ public:
 		input.push_back(input2);
 	}
 
-	void GetResult(void) {
+	int GetResult(void) {
 		for (auto each : input) {
 			if (each.length() == 0) throw length_error("At least one letter");
 		}
+
+		if (input[0].length() == input[1].length()) return 60;
 	}
 
 	void AddInputStrings(vector<string>& input) {

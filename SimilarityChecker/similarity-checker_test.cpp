@@ -35,3 +35,14 @@ TEST_F(SimilarCheckFixture, ThrowExceptionInputRightBlank) {
 
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
+
+TEST_F(SimilarCheckFixture, SameLength) {
+	input.push_back(("ABC"));
+	input.push_back(("DEF"));
+	checker.AddInputStrings(input);
+
+	EXPECT_EQ(60, checker.GetResult());
+}
+
+
+
