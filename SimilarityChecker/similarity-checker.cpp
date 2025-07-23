@@ -18,8 +18,9 @@ public:
 		}
 
 		if (input[0].length() == input[1].length()) return 60;
-		if (input[0].length() * 2 <= input[1].length()) return 0;
-		if (input[1].length() * 2<= input[0].length()) return 0;
+		if (input[0].length() < input[1].length()) swap(input[0], input[1]);
+
+		if (input[1].length() * 2 <= input[0].length()) return 0;
 
 	}
 
