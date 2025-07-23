@@ -9,69 +9,45 @@ class SimilarCheckFixture : public Test {
 public:
 	LengthChecker lengthChecker;
 
-	void setInputStrings(string input1, string input2) {
+	void assertInvalidLength(string input1, string input2) {
 		vector<string> input;
 		input.push_back(input1);
 		input.push_back(input2);
 		lengthChecker.AddInputStrings(input);
+
+		EXPECT_THROW(lengthChecker.GetResult(), length_error);
 	}
 
-	void checkLengthResult(int expected) {
+	void checkLengthResult(int expected, string input1, string input2) {
+		vector<string> input;
+		input.push_back(input1);
+		input.push_back(input2);
+		lengthChecker.AddInputStrings(input);
+
 		EXPECT_EQ(expected, lengthChecker.GetResult());
 	}
 };
 
-TEST_F(SimilarCheckFixture, ThrowExceptionInputBothBlank) {
-	setInputStrings("", "");
-	EXPECT_THROW(lengthChecker.GetResult(), length_error);
-}
-
-TEST_F(SimilarCheckFixture, ThrowExceptionInputLeftBlank) {
-	setInputStrings("", "A");
-	EXPECT_THROW(lengthChecker.GetResult(), length_error);
-}
-
-TEST_F(SimilarCheckFixture, ThrowExceptionInputRightBlank) {
-	setInputStrings("A", "");
-	EXPECT_THROW(lengthChecker.GetResult(), length_error);
+TEST_F(SimilarCheckFixture, ThrowExceptionInputBlank) {
+	assertInvalidLength("", "");
+	assertInvalidLength("", "A");
+	assertInvalidLength("A", "");
 }
 
 TEST_F(SimilarCheckFixture, SameLength) {
-	setInputStrings("ABC", "DEF");
-	checkLengthResult(60);
+	checkLengthResult(60, "ABC", "DEF");
+	checkLengthResult(60, "AAAAA", "BBBBB");
 }
 
-TEST_F(SimilarCheckFixture, RightTwiceLength) {
-	setInputStrings("A", "BC");
-	checkLengthResult(0);
+TEST_F(SimilarCheckFixture, OverLength) {
+	checkLengthResult(0, "A", "BC");
+	checkLengthResult(0, "A", "BCD");
+	checkLengthResult(0, "BC", "A");
+	checkLengthResult(0, "BCD", "A");
 }
 
-TEST_F(SimilarCheckFixture, RightOverTwiceLength) {
-	setInputStrings("A", "BCD");
-	checkLengthResult(0);
-}
-
-TEST_F(SimilarCheckFixture, LeftTwiceLength) {
-	setInputStrings("BC", "A");
-	checkLengthResult(0);
-}
-
-TEST_F(SimilarCheckFixture, LeftOverTwiceLength) {
-	setInputStrings("BCD", "A");
-	checkLengthResult(0);
-}
-
-TEST_F(SimilarCheckFixture, InputneTwo) {
-	setInputStrings("A", "AB");
-	checkLengthResult(0);
-}
-
-TEST_F(SimilarCheckFixture, InputTwoThree) {
-	setInputStrings("AA", "BBB");
-	checkLengthResult(30);
-}
-
-TEST_F(SimilarCheckFixture, InputNineteenTen) {
-	setInputStrings("AAAAAAAAAAAAAAAAAA", "BBBBBBBBBB");
-	checkLengthResult(12);
+TEST_F(SimilarCheckFixture, NormalLength) {
+	checkLengthResult(0, "A", "AB");
+	checkLengthResult(30, "AAA", "BB");
+	checkLengthResult(12, "AAAAAAAAAAAAAAAAAA", "BBBBBBBBBB");
 }
