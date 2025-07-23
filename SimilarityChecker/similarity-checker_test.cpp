@@ -41,13 +41,22 @@ TEST_F(SimilarCheckFixture, SameLength) {
 	checkLengthResult(60);
 }
 
-TEST_F(SimilarCheckFixture, TwiceLength) {
+TEST_F(SimilarCheckFixture, RightTwiceLength) {
 	setInputStrings("A", "BC");
 	checkLengthResult(0);
 }
 
-TEST_F(SimilarCheckFixture, OverTwiceLength) {
+TEST_F(SimilarCheckFixture, RightOverTwiceLength) {
 	setInputStrings("A", "BCD");
 	checkLengthResult(0);
 }
 
+TEST_F(SimilarCheckFixture, LeftTwiceLength) {
+	setInputStrings("BC", "A");
+	checkLengthResult(0);
+}
+
+TEST_F(SimilarCheckFixture, LeftOverTwiceLength) {
+	setInputStrings("BCD", "A");
+	checkLengthResult(0);
+}
