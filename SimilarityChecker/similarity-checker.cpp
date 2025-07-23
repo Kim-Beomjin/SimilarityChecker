@@ -12,7 +12,9 @@ public:
 	}
 
 	void GetResult(void) {
-		throw length_error("At least one letter");
+		for (auto each : input) {
+			if (each.length() == 0) throw length_error("At least one letter");
+		}
 	}
 
 private:
