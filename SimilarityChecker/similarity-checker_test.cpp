@@ -47,5 +47,19 @@ TEST_F(SimilarCheckFixture, SameLength) {
 	checkLengthResult(60);
 }
 
+TEST_F(SimilarCheckFixture, TwiceLength) {
+	input.push_back(("A"));
+	input.push_back(("BC"));
+	checker.AddInputStrings(input);
 
+	checkLengthResult(0);
+}
+
+TEST_F(SimilarCheckFixture, OverTwiceLength) {
+	input.push_back(("A"));
+	input.push_back(("BCD"));
+	checker.AddInputStrings(input);
+
+	checkLengthResult(0);
+}
 
