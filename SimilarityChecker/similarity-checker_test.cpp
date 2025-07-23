@@ -7,33 +7,33 @@ using namespace testing;
 
 class SimilarCheckFixture : public Test {
 public:
-	SimilarChecker checker;
+	LengthChecker lengthChecker;
 
 	void setInputStrings(string input1, string input2) {
 		vector<string> input;
 		input.push_back(input1);
 		input.push_back(input2);
-		checker.AddInputStrings(input);
+		lengthChecker.AddInputStrings(input);
 	}
 
 	void checkLengthResult(int expected) {
-		EXPECT_EQ(expected, checker.GetResult());
+		EXPECT_EQ(expected, lengthChecker.GetResult());
 	}
 };
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputBothBlank) {
 	setInputStrings("", "");
-	EXPECT_THROW(checker.GetResult(), length_error);
+	EXPECT_THROW(lengthChecker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputLeftBlank) {
 	setInputStrings("", "A");
-	EXPECT_THROW(checker.GetResult(), length_error);
+	EXPECT_THROW(lengthChecker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputRightBlank) {
 	setInputStrings("A", "");
-	EXPECT_THROW(checker.GetResult(), length_error);
+	EXPECT_THROW(lengthChecker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, SameLength) {

@@ -4,15 +4,15 @@
 
 using namespace std;
 
-class SimilarChecker {
+class LengthChecker {
 public:
-	SimilarChecker(void) = default;
-	SimilarChecker(string input1, string input2) {
+	LengthChecker(void) = default;
+	LengthChecker(string input1, string input2) {
 		input.push_back(input1);
 		input.push_back(input2);
 	}
 
-	double GetResult(void) {
+	int GetResult(void) {
 		for (auto each : input) {
 			if (each.length() == 0) throw length_error("At least one letter");
 		}
