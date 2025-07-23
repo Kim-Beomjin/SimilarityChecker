@@ -60,3 +60,18 @@ TEST_F(SimilarCheckFixture, LeftOverTwiceLength) {
 	setInputStrings("BCD", "A");
 	checkLengthResult(0);
 }
+
+TEST_F(SimilarCheckFixture, InputneTwo) {
+	setInputStrings("A", "AB");
+	checkLengthResult(0);
+}
+
+TEST_F(SimilarCheckFixture, InputTwoThree) {
+	setInputStrings("AA", "BBB");
+	checkLengthResult(30);
+}
+
+TEST_F(SimilarCheckFixture, InputNineteenTen) {
+	setInputStrings("AAAAAAAAAAAAAAAAAA", "BBBBBBBBBB");
+	checkLengthResult(12);
+}

@@ -12,16 +12,17 @@ public:
 		input.push_back(input2);
 	}
 
-	int GetResult(void) {
+	double GetResult(void) {
 		for (auto each : input) {
 			if (each.length() == 0) throw length_error("At least one letter");
 		}
 
 		if (input[0].length() == input[1].length()) return 60;
 		if (input[0].length() < input[1].length()) swap(input[0], input[1]);
-
 		if (input[1].length() * 2 <= input[0].length()) return 0;
 
+		int diff = input[0].length() - input[1].length();
+		return 60 - 60 * diff / input[1].length();
 	}
 
 	void AddInputStrings(vector<string>& input) {
