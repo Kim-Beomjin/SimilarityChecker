@@ -34,3 +34,26 @@ public:
 private:
 	vector<string> input;
 };
+
+class AlphaChecker {
+public:
+	AlphaChecker(void) = default;
+	AlphaChecker(string input1, string input2) {
+		input.push_back(input1);
+		input.push_back(input2);
+	}
+
+	int GetResult(void) {
+		for (auto each : input) {
+			if (each >= "A" && each <= "Z") continue;
+			throw invalid_argument("Allow CAPITAL only");
+		}
+	}
+
+	void AddInputStrings(vector<string>& input) {
+		this->input = input;
+	}
+
+private:
+	vector<string> input;
+};
