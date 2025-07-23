@@ -1,17 +1,37 @@
 #include "gmock/gmock.h"
 #include "similarity-checker.cpp"
+#include <string>
 
-TEST(SimilarCheck, ThrowExceptionInputBothBlank) {
-	SimilarChecker checker{ string(""), string("") };
+using namespace std;
+using namespace testing;
+
+class SimilarCheckFixture : public Test {
+public:
+	SimilarChecker checker;
+
+	vector<string> input;
+};
+
+TEST_F(SimilarCheckFixture, ThrowExceptionInputBothBlank) {
+	input.push_back((""));
+	input.push_back((""));
+	checker.AddInputStrings(input);
+
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
 
-TEST(SimilarCheck, ThrowExceptionInputLeftBlank) {
-	SimilarChecker checker{ string(""), string("A") };
+TEST_F(SimilarCheckFixture, ThrowExceptionInputLeftBlank) {
+	input.push_back((""));
+	input.push_back(("A"));
+	checker.AddInputStrings(input);
+
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
 
-TEST(SimilarCheck, ThrowExceptionInputRightBlank) {
-	SimilarChecker checker{ string("A"), string("") };
+TEST_F(SimilarCheckFixture, ThrowExceptionInputRightBlank) {
+	input.push_back(("A"));
+	input.push_back((""));
+	checker.AddInputStrings(input);
+
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
