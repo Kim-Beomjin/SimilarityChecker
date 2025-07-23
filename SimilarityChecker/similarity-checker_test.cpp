@@ -8,7 +8,13 @@ using namespace testing;
 class SimilarCheckFixture : public Test {
 public:
 	SimilarChecker checker;
-	vector<string> input;
+
+	void setInputStrings(string input1, string input2) {
+		vector<string> input;
+		input.push_back(input1);
+		input.push_back(input2);
+		checker.AddInputStrings(input);
+	}
 
 	void checkLengthResult(int expected) {
 		EXPECT_EQ(expected, checker.GetResult());
@@ -16,50 +22,32 @@ public:
 };
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputBothBlank) {
-	input.push_back((""));
-	input.push_back((""));
-	checker.AddInputStrings(input);
-
+	setInputStrings("", "");
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputLeftBlank) {
-	input.push_back((""));
-	input.push_back(("A"));
-	checker.AddInputStrings(input);
-
+	setInputStrings("", "A");
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputRightBlank) {
-	input.push_back(("A"));
-	input.push_back((""));
-	checker.AddInputStrings(input);
-
+	setInputStrings("A", "");
 	EXPECT_THROW(checker.GetResult(), length_error);
 }
 
 TEST_F(SimilarCheckFixture, SameLength) {
-	input.push_back(("ABC"));
-	input.push_back(("DEF"));
-	checker.AddInputStrings(input);
-
+	setInputStrings("ABC", "DEF");
 	checkLengthResult(60);
 }
 
 TEST_F(SimilarCheckFixture, TwiceLength) {
-	input.push_back(("A"));
-	input.push_back(("BC"));
-	checker.AddInputStrings(input);
-
+	setInputStrings("A", "BC");
 	checkLengthResult(0);
 }
 
 TEST_F(SimilarCheckFixture, OverTwiceLength) {
-	input.push_back(("A"));
-	input.push_back(("BCD"));
-	checker.AddInputStrings(input);
-
+	setInputStrings("A", "BCD");
 	checkLengthResult(0);
 }
 
