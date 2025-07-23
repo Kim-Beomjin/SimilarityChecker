@@ -8,8 +8,11 @@ using namespace testing;
 class SimilarCheckFixture : public Test {
 public:
 	SimilarChecker checker;
-
 	vector<string> input;
+
+	void checkLengthResult(int expected) {
+		EXPECT_EQ(expected, checker.GetResult());
+	}
 };
 
 TEST_F(SimilarCheckFixture, ThrowExceptionInputBothBlank) {
@@ -41,7 +44,7 @@ TEST_F(SimilarCheckFixture, SameLength) {
 	input.push_back(("DEF"));
 	checker.AddInputStrings(input);
 
-	EXPECT_EQ(60, checker.GetResult());
+	checkLengthResult(60);
 }
 
 
