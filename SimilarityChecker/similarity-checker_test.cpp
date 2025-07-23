@@ -82,3 +82,11 @@ TEST_F(AlphaCheckFixture, ThrowExceptionInvalidInput) {
 	assertInvalidArgument("123", "123");
 	assertInvalidArgument("abc", "ABC");
 }
+
+TEST_F(AlphaCheckFixture, SameAlpha) {
+	checkAlphaResult(40, "AAA", "AAA");
+	checkAlphaResult(40, "ABC", "ABC");
+	checkAlphaResult(40, "ABC", "BCA");
+	checkAlphaResult(40, "ABC", "ABCBCACBA");
+	checkAlphaResult(40, "ABC", "ABCAAAAAA");
+}

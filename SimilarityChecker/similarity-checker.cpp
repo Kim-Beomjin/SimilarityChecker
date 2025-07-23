@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <set>
 #include <stdexcept>
 
 using namespace std;
@@ -48,6 +49,11 @@ public:
 			if (each >= "A" && each <= "Z") continue;
 			throw invalid_argument("Allow CAPITAL only");
 		}
+
+		set<char> set1(input[0].begin(), input[0].end());
+		set<char> set2(input[1].begin(), input[1].end());
+
+		if (set1 == set2) return 40;
 	}
 
 	void AddInputStrings(vector<string>& input) {
